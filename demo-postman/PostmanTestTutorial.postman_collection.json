@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "e72fa507-7eba-48b9-bbf6-a6dc9209ed4a",
+		"name": "PostmanTestTutorial",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27922882",
+		"_collection_link": "https://www.postman.com/luumaartineez/workspace/postmantutorial/collection/27922882-e72fa507-7eba-48b9-bbf6-a6dc9209ed4a?action=share&source=collection_link&creator=27922882"
+	},
+	"item": [
+		{
+			"name": "POST usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 201\", ()=>{\r",
+							"    pm.response.to.have.status(201)\r",
+							"})\r",
+							"\r",
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.collectionVariables.set(\"userID\", jsonData.id)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Luisina\",\r\n    \"gender\": \"male\",\r\n    \"email\": \"luci@martinez.com\",\r\n    \"status\": \"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocolo}}{{url}}{{privacy}}{{version}}users",
+					"host": [
+						"{{protocolo}}{{url}}{{privacy}}{{version}}users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", ()=>{\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status active\", ()=>{\r",
+							"    pm.expect(jsonData.status).to.eql(\"active\")\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocolo}}{{url}}{{privacy}}{{version}}users/{{userID}}",
+					"host": [
+						"{{protocolo}}{{url}}{{privacy}}{{version}}users"
+					],
+					"path": [
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 200\", ()=>{\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"const jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Gender: female\", ()=>{\r",
+							"    pm.expect(jsonData.gender).to.eql(\"female\")\r",
+							"}\r",
+							")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 5817842,\r\n    \"name\": \"Luci\",\r\n    \"email\": \"luci@martinez.com\",\r\n    \"gender\": \"female\",\r\n    \"status\": \"active\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocolo}}{{url}}{{privacy}}{{version}}users/{{userID}}",
+					"host": [
+						"{{protocolo}}{{url}}{{privacy}}{{version}}users"
+					],
+					"path": [
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status 204\", ()=>{\r",
+							"    pm.response.to.have.status(204)\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{protocolo}}{{url}}{{privacy}}{{version}}users/{{userID}}",
+					"host": [
+						"{{protocolo}}{{url}}{{privacy}}{{version}}users"
+					],
+					"path": [
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "8fe4db6a479287950b9b781954beaf2f13a5a5d274f8ea933ac77f75a91fbb44",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "userID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
